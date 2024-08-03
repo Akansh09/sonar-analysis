@@ -1,0 +1,10 @@
+aws dynamodb create-table \
+    --table-name SonarIssues \
+    --attribute-definitions \
+        AttributeName=pull_request_id,AttributeType=N\
+        AttributeName=analysed_at,AttributeType=S\
+    --key-schema \
+        AttributeName=pull_request_id,KeyType=HASH\
+        AttributeName=analysed_at,KeyType=RANGE\
+    --provisioned-throughput \
+        ReadCapacityUnits=10,WriteCapacityUnits=5 --endpoint=http://localhost:8000
